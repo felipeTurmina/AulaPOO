@@ -26,10 +26,10 @@ console.log(calcularMedia(8,7,9))
 
 function verificarMaiorIdade(idade){
     if(idade >= 18){
-        return console.log(`Maior de idade`)
+        return `Maior de idade`
     }
     else{
-        return console.log(`Menor de idade`)
+        return `Menor de idade`
     }
 }
 console.log(verificarMaiorIdade(30))
@@ -48,20 +48,20 @@ console.log(`${aluno.nome} tem ${aluno.idade}, estuda ${aluno.curso} e possui me
 // Exercicio 6
 
 function mostarAluno(aluno){
-    return console.log(`${aluno.nome} tem ${aluno.idade}, estuda ${aluno.curso} e possui media ${aluno.media}`)
+    return `${aluno.nome} tem ${aluno.idade}, estuda ${aluno.curso} e possui media ${aluno.media}`
 }
 
 // Exercicio 7
 
 function verificarSituacao(nome, media){
     if(media >=7){
-        return console.log(`${nome} está aprovado (a)`)
+        return `${nome} está aprovado (a)`
     }
     else if(media < 5){
-        return console.log(`${nome} está reprovado (a)`)
+        return `${nome} está reprovado (a)`
     }
     else{
-        return console.log(`${nome} está em recuperação`)
+        return `${nome} está em recuperação`
     }
 }
 
