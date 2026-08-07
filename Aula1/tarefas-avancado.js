@@ -1,4 +1,4 @@
-//Exercicio1
+//Inicio
 const tarefas =[
     {
     id: 1,
@@ -34,7 +34,7 @@ const tarefas =[
     concluida: false
     },
 ]
-//Exercicio2
+//Exercicio1
 function mostrarTarefa(tarefas, idbuscado){
     const procurar = tarefas.find(tarefa => tarefa.id === idbuscado)
     if (procurar){
@@ -44,12 +44,12 @@ function mostrarTarefa(tarefas, idbuscado){
         return `Tarefa nao encontrada`
     } 
 }
-//Exercicio3
+//Exercicio2
 function mostrarTodasTarefas(tarefas){
     const lista = tarefas.map(tarefa => `ID: ${tarefa.id}, Titulo: ${tarefa.titulo}, Descrição: ${tarefa.descricao}, Prioridade: ${tarefa.prioridade}, Concluida: ${tarefa.concluida}`)
-    console.log(lista)
+    return lista
 }
-//Exercicio4
+//Exercicio3
 function concluirTarefa(listaDeTarefas,idDaLista){
     const procurar = listaDeTarefas.find(tarefa => tarefa.id === idDaLista)
 
@@ -58,18 +58,37 @@ function concluirTarefa(listaDeTarefas,idDaLista){
         return procurar
     }
     else{
-        return console.log(`Tarefa não encontrada`)
+        return `Tarefa não encontrada`
     }
 }
-//Exercicio5
+//Exercicio4
 function contarPendentes(tarefas){
     return tarefas.filter(tarefa => !tarefa.concluida).lenght
 }
-//Exercicio6
+//Exercicio5
 function filtrarConlcuidas(tarefas){
     const filtro = tarefas.filter(tarefa => tarefa.concluida)
 
     return filtro.map(tarefa =>
         `ID: ${tarefa.id}, Titulo: ${tarefa.titulo}, Descrição: ${tarefa.descricao}, Prioridade: ${tarefa.prioridade}, Concluida: ${tarefa.concluida}`
     )
+}
+//Exercicio6
+function filtrarPorPrioridade(tarefas,prioridades){
+    const filtro = tarefas.filter(tarefa => tarefa.prioridade === prioridades)
+
+    return filtro.map(tarefa =>
+        `ID: ${tarefa.id}, Titulo: ${tarefa.titulo}, Descrição: ${tarefa.descricao}, Prioridade: ${tarefa.prioridade}, Concluida: ${tarefa.concluida}`
+    )
+}
+//Exercicio7
+function buscarTarefasPorId(tarefas,idDaLista){
+    const filtro = tarefas.find(tarefa => tarefa.id === idDaLista)
+
+    if(filtro){
+        return `ID: ${filtro.id}, Titulo: ${filtro.titulo}, Descrição: ${filtro.descricao}, Prioridade: ${filtro.prioridade}, Concluida: ${filtro.concluida}`
+    }
+    else{
+        return `Tarefa não encontrada`
+    }
 }
