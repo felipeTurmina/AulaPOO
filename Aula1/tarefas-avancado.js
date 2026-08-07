@@ -55,7 +55,7 @@ function concluirTarefa(listaDeTarefas,idDaLista){
 
     if(procurar){
         procurar.concluida = true
-        return procurar
+        return procurar 
     }
     else{
         return `Tarefa não encontrada`
@@ -92,3 +92,25 @@ function buscarTarefasPorId(tarefas,idDaLista){
         return `Tarefa não encontrada`
     }
 }
+//Exercicio8
+function calcularResumo(tarefas){
+    const total = tarefas.length
+    const concluidas = tarefas.filter(tarefa => tarefa.concluida).length
+    const pendentes = tarefas.filter(tarefa => !tarefa.concluida).length
+    const prioridade = tarefas.filter(tarefa => tarefa.prioridade === `alta`).length
+
+    return `    Total de tarefas: ${total}
+    Tarefas concluídas: ${concluidas}
+    Tarefas pendentes: ${pendentes}
+    Tarefas de prioridade alta ${prioridade}`
+}
+
+console.log(mostrarTarefa(tarefas,1))
+console.log(mostrarTodasTarefas(tarefas))
+console.log(concluirTarefa(tarefas,3))
+console.log(contarPendentes(tarefas))
+console.log(filtrarConlcuidas(tarefas))
+console.log(filtrarConlcuidas(tarefas))
+console.log(filtrarPorPrioridade(tarefas,`alta`))
+console.log(buscarTarefasPorId(tarefas,3))
+console.log(calcularResumo(tarefas))
