@@ -220,10 +220,21 @@ function removerAluno(alunos, id){
 
 //DesafioExtra7
 
-// function ordenarPorMedia(alunos){
+function ordenarPorMedia(alunos){
 
-//     const filtro = alunos.map(aluno => mostrarTodosAlunos(aluno.sort((a,b) => a - b)))
- 
-// }
+    return alunos.sort((a,b)=> b.media - a.media)
+}
+    
+//DesafioExtra8
 
-// console.log(ordenarPorMedia(alunos))
+function mostrarRanking(alunos){
+    const alunosOrdenados = ordenarPorMedia(alunos)
+
+
+    return alunosOrdenados.map((aluno,indice)=>{
+    return   `${indice + 1}º lugar: ${aluno.nome} - Média ${aluno.media}`
+    })
+}
+
+// DesafioExtra9
+
