@@ -1,4 +1,4 @@
-class contaBancaria {
+class ContaBancaria {
     constructor(nome,saldo) {
         this.nome = nome;
         this.saldo = saldo;
@@ -17,7 +17,7 @@ class contaBancaria {
         console.log(`Nome: ${this.nome} | Saldo: ${this.saldo}`);
     }
     transferir(valor, contaDestino) {
-        if (valor <= this.saldo) {
+               if (valor <= this.saldo) {
             this.saldo -= valor;
             contaDestino.depositar(valor);
         } else {
@@ -26,8 +26,8 @@ class contaBancaria {
     }
 }
 
-const conta1 = new contaBancaria("Ana", 500);
-const conta2 = new contaBancaria("João", 200);
+const conta1 = new ContaBancaria("Ana", 500);
+const conta2 = new ContaBancaria("João", 200);
 conta1.exibirSaldo();
 conta2.exibirSaldo();
 conta1.depositar(100);

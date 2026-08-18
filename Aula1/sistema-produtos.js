@@ -1,4 +1,4 @@
-class produto {
+class Produto {
     constructor(nome,preco,quantidade,categoria){
         this.nome = nome;
         this.preco = preco;
@@ -27,7 +27,7 @@ class produto {
     }
 }
 
-const produtos = new produto("Mouse", 100, 5, "Informática");
+const produtos = new Produto("Mouse", 100, 5, "Informática");
 produtos.exibirProduto();
 console.log(produtos.calcularValorTotal());
 produtos.exibirProduto();
