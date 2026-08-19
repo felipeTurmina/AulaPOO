@@ -1,87 +1,128 @@
-const DISPONIVEL = `Disponivel`
-const INDISPONIVEL = `Indisponivel`
+const DISPONIVEL = `Disponível`
+const INDISPONIVEL = `Indisponível`
 
-
-
-class Livro{
-    constructor(titulo,autor,ano){
+class Livro {
+    constructor(titulo, autor, ano) {
         this.titulo = titulo
         this.autor = autor
         this.ano = ano
-        this.disponivel = DISPONIVEL
+        this.status = DISPONIVEL
     }
-    exibirLivro(){
-        console.log(`Titulo: ${this.titulo}`)
+
+    exibirLivro() {
+        console.log(`Título: ${this.titulo}`)
         console.log(`Autor: ${this.autor}`)
-        console.log(`Ano ${this.ano}`)
-        console.log(`Disponibilidade: ${this.disponivel}`)
+        console.log(`Ano: ${this.ano}`)
+        console.log(`Status: ${this.status}`)
     }
-    marcarComoEmprestado(){
-        this.disponivel = INDISPONIVEL
+
+    marcarComoIndisponivel() {
+        this.status = INDISPONIVEL
     }
-    marcarComoDisponivel(){
-        this.disponivel = DISPONIVEL
+
+    marcarComoDisponivel() {
+        this.status = DISPONIVEL
     }
 }
 
-
-class Usuario{
-    constructor(nome,email){
+class Usuario {
+    constructor(nome, email) {
         this.nome = nome
         this.email = email
     }
-    exibirUsuario(){
-        console.log(`Nome: ${this.nome}`)
+
+    exibirUsuario() {
+        console.log(`Usuário: ${this.nome}`)
         console.log(`E-mail: ${this.email}`)
     }
 }
 
-class Emprestimo{
-    constructor(usuario,livro,dataEmprestimo){
+class Emprestimo {
+    constructor(usuario, livro, dataEmprestimo) {
         this.usuario = usuario
-        this.livro= livro
+        this.livro = livro
         this.dataEmprestimo = dataEmprestimo
         this.status = DISPONIVEL
     }
 
-    realizarEmprestimo(){
-        if(this.livro.disponivel === INDISPONIVEL){
-            return `Livro indisponivel`
-        }else{
-            this.livro.marcarComoDisponivel()
-        }
-    }
-    exibirEmprestimo(){
-        console.log(`Usuario: ${this.usuario}`)
-        console.log(`Livro(s) emprestado(s): ${this.livro.titulo}`)
-        console.log(`Data do emprestimo: ${this.dataEmprestimo}`)
+    exibirEmprestimo() {
+        console.log(`Usuário: ${this.usuario.nome}`)
+        console.log(`Livro: ${this.livro.titulo}`)
+        console.log(`Data do empréstimo: ${this.dataEmprestimo}`)
         console.log(`Status: ${this.status}`)
     }
-    devolverLivro(livroDevolvido){
-        this.livro.filter(livro => livroDevolvido === livro)
-            this.livro.status = DISPONIVEL   
+
+    realizarEmprestimo() {
+        if (this.livro.status === INDISPONIVEL) {
+            console.log(`Livro indisponível para empréstimo.`)
+            return
+        }
+        this.livro.marcarComoIndisponivel()
+        this.status = INDISPONIVEL
+        console.log(`Empréstimo realizado com sucesso.`)
+    }
+    devolverLivro() {
+        if (this.livro.status === DISPONIVEL) {
+            console.log(`Este livro já está disponível.`)
+            return
+        }
+        this.livro.marcarComoDisponivel()
+        this.status = DISPONIVEL
+        console.log(`Livro devolvido com sucesso.`)
     }
 }
 
-const livro1 = new Livro("Dom Casmurro", "Machado de Assis", 1899);
-console.log(`---------------------------------------------------------------------------`)
+class Biblioteca{
+    constructor(){
+        this.usuario = []
+        this.titulo = []
+    }
+    adicionarLivro(livro){
+        this.titulo.push(livro)
+    }
+    adicionarUsuario(usuario){
+        this.usuario.push(usuario)
+    }
+    buscarLivro(titulo){
+        return this.titulo.find(livro =>livro.titulo === titulo)
+    }
+}
+
+const livro1 = new Livro(`Árvore derrubada`, `Machado de Assis`, 1899)
+const livro2 = new Livro(`Peter Pan`, `Mágico`, 1904)
+const livro3 = new Livro(`O Pequeno Príncipe`, `Antoine de Saint-Exupéry`, 1943)
+
+const usuario1 = new Usuario(`Felipe`, `felipe@cesurg.com`)
+const usuario2 = new Usuario(`Samuel`, `samuel@cesurg.com`)
+
+const emprestimo1 = new Emprestimo(usuario1, livro1, `19/08/2026`)
+const emprestimo2 = new Emprestimo(usuario2, livro2, `18/08/2026`)
+const emprestimo3 = new Emprestimo(usuario1, livro3, `19/08/2026`)
+
+console.log(`----------------1---------------------`)
 livro1.exibirLivro()
-console.log(`---------------------------------------------------------------------------`)
-const livro2 = new Livro("Peter Pan", "Setembrino", 1900);
+console.log(`----------------2---------------------`)
 livro2.exibirLivro()
-console.log(`---------------------------------------------------------------------------`)
-const usuario1 = new Usuario("Ana", "ana@email.com");
+console.log(`----------------3---------------------`)
+livro3.exibirLivro()
+console.log(`----------------4---------------------`)
 usuario1.exibirUsuario()
-console.log(`---------------------------------------------------------------------------`)
-const emprestimo1 = new Emprestimo(usuario1.nome, livro1, "18/08/2026");
+console.log(`----------------5---------------------`)
+usuario2.exibirUsuario()
+console.log(`----------------6---------------------`)
 emprestimo1.exibirEmprestimo()
-console.log(`---------------------------------------------------------------------------`)
+console.log(`----------------7---------------------`)
+emprestimo2.exibirEmprestimo()
+console.log(`----------------8---------------------`)
+emprestimo3.exibirEmprestimo()
+console.log(`----------------9---------------------`)
 emprestimo1.realizarEmprestimo()
 emprestimo1.exibirEmprestimo()
-console.log(`---------------------------------------------------------------------------`)
-const emprestimo2 = new Emprestimo(usuario1.nome, livro1, "18/08/2026");
-emprestimo1.realizarEmprestimo()
+console.log(`----------------10--------------------`)
+emprestimo1.devolverLivro()
 emprestimo1.exibirEmprestimo()
-console.log(`---------------------------------------------------------------------------`)
-
-
+console.log(`----------------11--------------------`)
+emprestimo2.realizarEmprestimo()
+console.log(`----------------12--------------------`)
+emprestimo2.realizarEmprestimo()
+console.log(`----------------13--------------------`)
