@@ -89,18 +89,6 @@ class Empresa {
 }
 
 
-const dev1 = new Desenvolvedor("Ana","ana@email.com",4000,"JavaScript");
-const designer1 = new Designer("João","joao@email.com",3500,"Figma");
-const gerente1 = new Gerente("Carlos","carlos@email.com",6000,"Tecnologia");
-dev1.exibirDados();
-console.log(`Bônus: R$ ${dev1.calcularBonus()}`);
-console.log("---");
-designer1.exibirDados();
-console.log(`Bônus: R$ ${designer1.calcularBonus()}`);
-console.log("---");
-gerente1.exibirDados();
-console.log(`Bônus: R$ ${gerente1.calcularBonus()}`);
-
 // ===================== TESTES =====================
 console.log("\n=== TESTES ===\n");
 
