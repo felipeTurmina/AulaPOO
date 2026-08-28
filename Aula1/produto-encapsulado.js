@@ -92,8 +92,15 @@ class Produto{
         this.#preco += (this.#preco * percentual)/100
         console.log(`Valor reajustado`)
     }
+}
 
-
+class Estoque{
+    constructor(produtos){
+        produtos = []
+    }
+    adicionarProduto(produto){
+        produtos.push(produto)
+    }
 }
 
 const produto1 = new Produto(`Graxa`,`Lubrificante`,50,10)
