@@ -95,15 +95,48 @@ class Produto{
 }
 
 class Estoque{
+<<<<<<< HEAD
     constructor(produtos){
         produtos = []
     }
     adicionarProduto(produto){
         produtos.push(produto)
+=======
+    constructor(){
+        this.produtos = []
+    }
+    adicionarProduto(produto){
+        this.produtos.push(produto)
+    }
+    listarProduto(){
+        this.produtos.forEach(produto => produto.exibirProduto())
+    }
+    listarProdutoAtivo(){
+        const produtosAtivos = this.produtos.filter(produto => produto.ativo)
+
+        produtosAtivos.forEach(produto => produto.exibirProduto())
+
+        return produtosAtivos
+    }
+    calcularValorTotalDoEstoque(){
+
+        // const total = this.produtos.map(produto => produto.quantidade * produto.preco)
+
+        // console.log(`Valor total do estoque: R$${total}`)
+        // return total
+>>>>>>> 79500bc56628b949e950a69fda8220d85bd6aaee
     }
 }
 
 const produto1 = new Produto(`Graxa`,`Lubrificante`,50,10)
+const produto2 = new Produto(`Óleo`, `Automotivo`, 30, 5)
+const produto3 = new Produto(`Filtro`, `Peças`, 25, 8)
+
+const estoque = new Estoque()
+
+estoque.adicionarProduto(produto1)
+estoque.adicionarProduto(produto2)
+estoque.adicionarProduto(produto3)
 
 produto1.exibirProduto()
 console.log(`-------------------------------------------`)
@@ -148,4 +181,12 @@ console.log(`-------------------------------------------`)
 produto1.reajustarPreco(10)
 console.log(`-------------------------------------------`)
 produto1.exibirProduto()
+console.log(`-------------------------------------------`)
+estoque.listarProduto()
+console.log(`-------------------------------------------`)
+produto2.desativarProduto()
+console.log(`-------------------------------------------`)
+estoque.listarProdutoAtivo()
+console.log(`-------------------------------------------`)
+estoque.calcularValorTotalDoEstoque()
 console.log(`-------------------------------------------`)
