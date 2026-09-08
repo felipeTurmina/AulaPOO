@@ -7,44 +7,77 @@ class Conteudo{
         this.titulo = titulo
         this.genero = genero
         this.classificacao = classificacao
-        this.ano = ano
-        this.validacao()     
+        this.ano = ano    
     }  
-    validacao(){
-        if(!this.titulo){console.log(`Titulo inválido`)}
-        if(!this.genero){console.log(`Genero inválido`)}
-        if(!valoresValidos.includes(this.classificacao)){console.log(`Valor inválido, digite as opções: Livre, 10, 12, 14, ,16 ou 18`)}
-        if(this.ano < 1900, this.ano > 2026){console.log(`Ano inválido`)}
+        validarBase() {
+        const erros = []
+
+        if (!this.titulo) erros.push(`Título inválido`)
+        if (!this.genero) erros.push(`Gênero inválido`)
+        if (!valoresValidos.includes(this.classificacao)) {
+            erros.push(`Valor inválido, digite as opções: Livre, 10, 12, 14, 16 ou 18`)
+        }
+        if (!Number.isInteger(this.ano) || this.ano < 1900 || this.ano > 2026) {
+            erros.push(`Ano inválido`)
+        }
+
+        return erros
+    }
+
+    validacao() {
+        return this.validarBase()
     }
 }
 
 class Filme extends Conteudo{
     constructor(titulo, genero, classificacao, ano, duracao, diretor){
         super(titulo, genero, classificacao, ano)
+
         this.duracao = duracao
         this.diretor = diretor
+
         this.validacao()
     }
-    validacao(){
-        if(this.duracao < 1 , this.duracao > 300 ){console.log(`Duração inválida`)}
-        if(!this.diretor){console.log(`Diretor inválido`)}
-        super.validacao()
+        validacao(){
+        const erros = super.validacao()
+
+        if (this.duracao < 1 || this.duracao > 300) {
+            erros.push(`Duração inválida`)
+        }
+
+        if (!this.diretor) {
+            erros.push(`Diretor inválido`)
+        }
+
+        return erros
     }
 }
 
 class Serie extends Conteudo{
     constructor(titulo, genero, classificacao, ano, quantidadeTemporada, quantidadeEpisodios, status){
+
         super(titulo, genero, classificacao, ano)
+
         this.quantidadeTemporada = quantidadeTemporada
         this.quantidadeEpisodios = quantidadeEpisodios
         this.status = status
+
         this.validacao()
     }
-    validacao(){
-        if(!this.quantidadeTemporada > 0){console.log(`Quantidade de temporadas inválida`)}
-        if(!this.quantidadeEpisodios > 0){console.log(`Quantidade de episódios inválida`)}
-        if(!statusSerie.includes(this.status)){console.log(`Valor inválido, digite: Em andamento, Finalizada ou Cancelada`)}
-        super.validacao()
+        validacao(){
+        const erros = super.validacao()
+
+        if (this.quantidadeTemporada <= 0) {
+            erros.push(`Quantidade de temporadas inválida`)
+        }
+        if (this.quantidadeEpisodios <= 0) {
+            erros.push(`Quantidade de episódios inválida`)
+        }
+        if (!statusSerie.includes(this.status)) {
+            erros.push(`Valor inválido, digite: Em andamento, Finalizada ou Cancelada`)
+        }
+
+        return erros
     }
 }
 
@@ -55,9 +88,47 @@ class Documentario extends Conteudo{
         this.fatosReais = fatosReais
         this.duracao = duracao
     }
-    validacao(){
-        if(!this.temaPrincipal){console.log(`Tema inválido`)}
-        if(!this.fatosReais === false, !this.fatosReais ===  true){console.log(`Valor inválido, tem que ser true ou false`)}
+        validacao(){
+        const erros = super.validacao()
+
+        if (!this.temaPrincipal) {
+            erros.push(`Tema inválido`)
+        }
+        if (typeof this.fatosReais !== `boolean`) {
+            erros.push(`Valor inválido, tem que ser true ou false`)
+        }
+        if (this.duracao < 1 || this.duracao > 300) {
+            erros.push(`Duração inválida`)
+        }
+
+        return erros
+    }
+}
+
+class Lista {
+    constructor() {
+        this.lista = []
+    }
+
+    adicionar(conteudo) {
+        this.lista.push(conteudo)
+    }
+
+    validarTodos() {
+        this.lista.forEach(conteudo => {
+            const erros = conteudo.validacao()
+            const tipo = conteudo.constructor.name
+
+            console.log(`Título: ${conteudo.titulo}`)
+            console.log(`Tipo: ${tipo}`)
+            console.log(`Resultado: ${erros.length === 0 ? `Válido` : `Inválido`}`)
+
+            if (erros.length > 0) {
+                console.log(`Erros: ${erros.join(`; `)}`)
+            }
+
+            console.log(`-------------------------------------------------`)
+        })
     }
 }
 
@@ -84,6 +155,19 @@ console.log(`-------------------------------------------------`)
 console.log(serie1)
 console.log(`-------------------------------------------------`)
 console.log(serie2)
+const listaConteudos = new Lista()
+
+listaConteudos.adicionar(conteudo1)
+listaConteudos.adicionar(conteudo2)
+listaConteudos.adicionar(filme1)
+listaConteudos.adicionar(filme2)
+listaConteudos.adicionar(serie1)
+listaConteudos.adicionar(serie2)
+
+const documentario1 = new Documentario(`Documentário 1`, `História`, `Livre`, 2020, `Natureza`, true, 90)
+
+listaConteudos.adicionar(documentario1)
+
+console.log(`Validação da lista de conteúdos`)
 console.log(`-------------------------------------------------`)
-console.log(`-------------------------------------------------`)
-console.log(`-------------------------------------------------`)
+listaConteudos.validarTodos()
