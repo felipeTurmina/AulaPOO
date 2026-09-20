@@ -19,6 +19,19 @@ function converterId(valor) {
   return Number.isInteger(id) ? id : null;
 }
 
+app.get('/', (request, response) => {
+  response.status(200).json({
+    mensagem: 'API de Tarefas',
+    rotas: {
+      'GET /tarefas': 'Lista todas as tarefas',
+      'GET /tarefas/:id': 'Busca uma tarefa pelo id',
+      'POST /tarefas': 'Cria uma nova tarefa',
+      'PATCH /tarefas/:id': 'Atualiza parcialmente uma tarefa',
+      'DELETE /tarefas/:id': 'Remove uma tarefa',
+    },
+  });
+});
+
 app.get('/tarefas', (request, response) => {
   response.status(200).json(tarefasService.listarTarefas());
 });
