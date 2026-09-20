@@ -1,0 +1,6 @@
+node_modules/
+.env
+
+# a raiz do repositório ignora package-lock.json globalmente, mas este projeto
+# exige o lockfile versionado (ver enunciado da atividade)
+!package-lock.json
