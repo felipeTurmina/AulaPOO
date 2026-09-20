@@ -31,6 +31,32 @@ app.post('/tarefas', (request, response) => {
   response.status(201).json(tarefa);
 });
 
+app.patch('/tarefas/:id', (request, response) => {
+  const id = Number(request.params.id);
+  const tarefaExistente = tarefasService.buscarTarefaPorId(id);
+  if (!tarefaExistente) return response.status(404).json({ erro: 'Tarefa não encontrada' });
+
+  const { titulo, descricao, prioridade, concluida } = request.body;
+
+  if (titulo !== undefined && !titulo) {
+    return response.status(400).json({ erro: 'Título não pode ser vazio' });
+  }
+  if (descricao !== undefined && !descricao) {
+    return response.status(400).json({ erro: 'Descrição não pode ser vazia' });
+  }
+  if (prioridade !== undefined && !tarefasService.PRIORIDADES_VALIDAS.includes(prioridade)) {
+    return response.status(400).json({
+      erro: `Prioridade inválida. Valores aceitos: ${tarefasService.PRIORIDADES_VALIDAS.join(', ')}`,
+    });
+  }
+  if (concluida !== undefined && typeof concluida !== 'boolean') {
+    return response.status(400).json({ erro: 'Concluída deve ser um valor booleano' });
+  }
+
+  const tarefa = tarefasService.atualizarTarefa(id, { titulo, descricao, prioridade, concluida });
+  response.status(200).json(tarefa);
+});
+
 app.delete('/tarefas/:id', (request, response) => {
   const removida = tarefasService.removerTarefa(Number(request.params.id));
   if (!removida) return response.status(404).json({ erro: 'Tarefa não encontrada' });
