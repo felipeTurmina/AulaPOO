@@ -14,7 +14,7 @@ Praticar a criação de uma API REST com Node.js e Express: organização em cam
 
 - [Node.js](https://nodejs.org/)
 - [Express](https://expressjs.com/) 5
-- [nodemon](https://www.npmjs.com/package/nodemon) (apenas em desenvolvimento, para reiniciar o servidor a cada alteração)
+- [nodemon](https://www.npmjs.com/package/nodemon)
 
 ## Instalação
 
@@ -49,11 +49,11 @@ A porta pode ser trocada com a variável de ambiente `PORT` (ex.: `PORT=4000 npm
 ```
 api-tarefas/
 ├── src/
-│   ├── server.js               # configura o Express, define as rotas e as respostas HTTP
+│   ├── server.js         
 │   ├── dados/
-│   │   └── tarefas.js          # array com as tarefas iniciais (guarda os dados em memória)
+│   │   └── tarefas.js     
 │   └── servicos/
-│       └── tarefasService.js   # regras de negócio: listar, buscar, criar, atualizar, remover
+│       └── tarefasService.js  
 ├── .gitignore
 ├── package.json
 ├── package-lock.json
